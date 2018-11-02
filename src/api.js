@@ -1,10 +1,10 @@
 import axios from 'axios';
 const apiUrl = 'https://api.spreaker.com/v2/';
 
-export const getShowInfo = () => {
-  return axios.get(`${apiUrl}/shows/1530161`);
+export const getShowInfo = (showId) => {
+  return axios.get(`${apiUrl}/shows/${showId}`);
 }
 
-export const getEpisodeList = () => {
-  return axios.get(`${apiUrl}/shows/1530161/episodes`);
+export const getEpisodeList = (showId) => {
+  return axios.get(`${apiUrl}/shows/${showId}/episodes`);
 }
