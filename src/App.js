@@ -36,8 +36,7 @@ class App extends Component {
   fetchShowEpisodes = async (showId) => {
     const {data: {response: {items}}} = await api.getEpisodeList(showId);
     this.setState({
-      episodes: items,
-      selectedEpisode: items[0]
+      episodes: items
     });
   }
 

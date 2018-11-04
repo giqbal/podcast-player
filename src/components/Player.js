@@ -28,12 +28,18 @@ class Player extends Component {
             }
           }
           controls={true}
+          playing={true}
           width='100%'
           height='100%'
+          onEnded={() => previousOrNextEpisode('next')}
         />
       </div>
       :
-      <p>Select episode to play</p>
+      <div className='navbar is-fixed-bottom is-black'>
+        <div className='navbar-brand'>
+          <p>Select episode to play</p>
+        </div>
+      </div>
     );
   }
 }
