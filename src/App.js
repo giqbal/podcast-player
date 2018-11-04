@@ -3,7 +3,6 @@ import EpisodeList from './components/EpisodeList';
 import Player from './components/Player';
 import ShowInfo from './components/ShowInfo';
 import * as api from './api';
-import './App.css';
 
 class App extends Component {
   state = {
