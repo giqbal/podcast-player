@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EpisodeList from './components/EpisodeList';
 import Player from './components/Player';
 import ShowInfo from './components/ShowInfo';
+import axios from 'axios';
 import * as api from './api';
 
 class App extends Component {
@@ -11,7 +12,8 @@ class App extends Component {
     playing: {
       episode_id: null,
       isPlaying: false
-    }
+    },
+    next_url: ''
   }
 
   componentDidMount() {
@@ -35,6 +37,7 @@ class App extends Component {
         getSelectedEpisode={this.getSelectedEpisode}
         playing={playing}
         />
+        <a className="button" onClick={this.fetchMoreEpisodes}>More</a>
         <Player 
         episodeToPlay={selectedEpisode} 
         previousOrNextEpisode={this.getEpisode} 
@@ -45,10 +48,21 @@ class App extends Component {
   }
 
   fetchShowEpisodes = async (showId) => {
-    const {data: {response: {items}}} = await api.getEpisodeList(showId);
+    const {data: {response}} = await api.getEpisodeList(showId);
     this.setState({
-      episodes: items
+      episodes: response.items,
+      next_url: response.next_url
     });
+  }
+
+  fetchMoreEpisodes = async () => {
+    const {next_url, episodes} = this.state;
+    const {data: {response}} = await axios.get(next_url);
+    const existingEpisodes = episodes.slice();
+    this.setState({
+      episodes: existingEpisodes.concat(response.items),
+      next_url: response.next_url
+    })
   }
 
   getSelectedEpisode = (episode) => {
