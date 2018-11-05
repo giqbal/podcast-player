@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-const EpisodeList = ({episodes, getSelectedEpisode, playing}) => {
+const EpisodeList = ({episodes, getSelectedEpisode, playing, fetchMoreEpisodes}) => {
   return (
     <div className='section'>
       {episodes.map(episode => {
@@ -27,6 +27,9 @@ const EpisodeList = ({episodes, getSelectedEpisode, playing}) => {
           </div>
         );
       })}
+      <div className='buttons is-centered'>
+        <span className='button' onClick={fetchMoreEpisodes}>Show more...</span>
+      </div>
     </div>
   );
   

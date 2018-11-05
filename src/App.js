@@ -36,8 +36,8 @@ class App extends Component {
         episodes={episodes} 
         getSelectedEpisode={this.getSelectedEpisode}
         playing={playing}
+        fetchMoreEpisodes={this.fetchMoreEpisodes}
         />
-        <a className="button" onClick={this.fetchMoreEpisodes}>More</a>
         <Player 
         episodeToPlay={selectedEpisode} 
         previousOrNextEpisode={this.getEpisode} 
