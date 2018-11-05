@@ -22,7 +22,7 @@ const EpisodeList = ({episodes, getSelectedEpisode, playing}) => {
               <p>{moment(episode.published_at).format('D MMM YYYY')}</p>
             </div>
             <div className='media-right'>
-              <p>{`${durationHours} hrs ${durationMins} min`}</p>
+              <p>{`${durationHours} ${durationHours === 1? 'hr' : 'hrs'} ${durationMins} min`}</p>
             </div>
           </div>
         );
