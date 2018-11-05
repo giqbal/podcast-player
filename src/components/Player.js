@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
+// Player has been left as class to allow for playing session to be recorded on LocalStorage
 
 class Player extends Component {
   render() {
-    const {episodeToPlay, previousOrNextEpisode} = this.props;
+    const {episodeToPlay, previousOrNextEpisode, setPlayingStatus} = this.props;
     return (
       episodeToPlay?
       <div className='navbar is-fixed-bottom is-black'>
@@ -32,6 +33,8 @@ class Player extends Component {
           width='100%'
           height='100%'
           onEnded={() => previousOrNextEpisode('next')}
+          onPlay={() => setPlayingStatus(true)}
+          onPause={() => setPlayingStatus(false)}
         />
       </div>
       :

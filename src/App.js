@@ -7,7 +7,11 @@ import * as api from './api';
 class App extends Component {
   state = {
     episodes: [],
-    selectedEpisode: null
+    selectedEpisode: null,
+    playing: {
+      episode_id: null,
+      isPlaying: false
+    }
   }
 
   componentDidMount() {
@@ -15,7 +19,7 @@ class App extends Component {
   }
   
   render() {
-    const {episodes, selectedEpisode} = this.state;
+    const {episodes, selectedEpisode, playing} = this.state;
     return (
       <div>
         <section className='hero is-dark'>
@@ -26,8 +30,16 @@ class App extends Component {
           </div>
         </section>
         <ShowInfo /> 
-        <EpisodeList episodes={episodes} getSelectedEpisode={this.getSelectedEpisode}/>
-        <Player episodeToPlay={selectedEpisode} previousOrNextEpisode={this.getEpisode} />
+        <EpisodeList 
+        episodes={episodes} 
+        getSelectedEpisode={this.getSelectedEpisode}
+        playing={playing}
+        />
+        <Player 
+        episodeToPlay={selectedEpisode} 
+        previousOrNextEpisode={this.getEpisode} 
+        setPlayingStatus={this.getPlayingStatus}
+        />
       </div>
     );
   }
@@ -55,6 +67,17 @@ class App extends Component {
       selectedEpisode: episodes[currentEpisodeIndex + incrementBy]
     })
   }
+
+  getPlayingStatus = (playingState) => {
+    const {selectedEpisode: {episode_id}} = this.state;
+    this.setState({
+      playing: {
+        episode_id,
+        isPlaying: playingState
+      }
+    })
+  }
+
 }
 
 export default App;

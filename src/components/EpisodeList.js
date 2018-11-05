@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
-const EpisodeList = ({episodes, getSelectedEpisode}) => {
+const EpisodeList = ({episodes, getSelectedEpisode, playing}) => {
   return (
     <div className='section'>
       {episodes.map(episode => {
@@ -13,7 +13,12 @@ const EpisodeList = ({episodes, getSelectedEpisode}) => {
               <i className='fas fa-play-circle'></i>
             </span>
             <div className='media-content'>
-              <p>{episode.title}</p>
+              {playing.episode_id === episode.episode_id && playing.isPlaying?
+              <p>
+                <strong>{episode.title}</strong>
+              </p>
+              :
+              <p>{episode.title}</p>}
               <p>{moment(episode.published_at).format('D MMM YYYY')}</p>
             </div>
             <div className='media-right'>
